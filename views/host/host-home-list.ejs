@@ -1,0 +1,43 @@
+<%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <main class="@container mx-auto bg-white shadow-lg rounded-lg p-8 mt-10">
+      <h2 class="text-3xl text-red-500 font-bold text-center mb-6">
+        Here are our registered homes:
+      </h2>
+      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 p-4">
+  <% registeredHomes.forEach(home => { %>
+    <div class="bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition duration-300 flex flex-col overflow-hidden">
+      <!-- Image -->
+      <img src="<%= home.link %>" alt="User Image" class="h-48 w-full object-cover">
+
+      <!-- Card Content -->
+      <div class="flex flex-col flex-grow p-4"> 
+        <div class="flex justify-between items-start mb-2">
+          <h3 class="font-semibold text-lg text-gray-800 leading-tight"><%= home.houseName %></h3>
+          <div class="flex items-center gap-1">
+            <i class="fas fa-star text-yellow-400 text-sm"></i>
+            <span class="text-sm"><%= home.rating %></span>
+          </div>
+        </div>
+        <p class="text-sm text-gray-600 mb-4">₹<%= home.price %></p>
+        <p class="text-sm font-medium text-gray-500 mb-6"><%= home.location %></p>
+        <div class="flex mt-auto space-x-2 flex-row">
+          <a href="/host/edit-home/<%= home._id %>?editing=true" class="bg-green-500 text-white w-fit h-fit rounded-md font-medium text-center p-1 px-2 mt-2 hover:bg-green-600 transition">
+            Edit
+          </a>
+          <form action="/host/delete-home/<%= home._id %>" method="post" class="mt-2">
+            <button class="bg-red-500 text-white w-fit p-2 rounded-md py-1 font-medium hover:bg-red-600 transition">
+              Delete
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+</div>
+
+    </main>
+  </body>
+</html>

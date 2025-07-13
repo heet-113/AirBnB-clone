@@ -1,0 +1,38 @@
+<%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <main class="@container mx-auto bg-white shadow-lg rounded-lg p-8 mt-10">
+      <h2 class="text-3xl text-red-500 font-bold text-center mb-6">
+        Here are your favourite homes:
+      </h2>
+      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 p-4">
+        <% favouriteHomes.forEach(home => { %>
+          <div class="bg-gray-100 rounded-lg shadow-md hover:shadow-lg transition duration-300 flex flex-col overflow-hidden">
+        <!-- Image -->
+          <img src="<%= home.link %>" alt="User Image" class="h-48 w-full object-cover">
+
+          <!-- Card Content -->
+          <div class="flex flex-col flex-grow p-4">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="font-semibold text-lg text-gray-800 leading-tight"><%= home.houseName %></h3>
+             <div class="flex items-center gap-1">
+               <i class="fas fa-star text-yellow-400 text-sm"></i>
+                <span class="text-sm"><%= home.rating %></span>
+              </div>
+            </div>
+            <p class="text-sm text-gray-600 mb-4">₹<%= home.price %></p>
+            <p class="text-sm font-medium text-gray-500 mb-6"><%= home.location %></p>
+            <div class="mt-auto space-x-2">
+              <a href="/homes/<%= home._id %>" class="bg-blue-600 text-white w-fit rounded-md p-2 font-medium hover:bg-blue-700 transition">Details</a>
+            </div>
+            </div>
+            <form action="/favourites/<%= home._id %>" method="post" class="mx-4 mb-3">
+              <button type="submit" class="bg-red-600 text-white w-fit rounded-md p-2 font-medium hover:bg-red-700 transition ">Remove</button>
+            </form>
+          </div>
+        <% }) %>
+      </div>
+    </main>
+  </body>
+</html>
